@@ -1,20 +1,27 @@
 
 import assert from "assert";
+// import { ObjectID } from "bson"
 import { ObjectID } from "bson"
 import { CustomHelpers, ErrorReport, LanguageMessages, Root } from "joi";
 
 
-export function objectidValidator(Joi: Root, message: LanguageMessages) {
-   assert(Joi && Joi.object, 'you must pass Joi as an argument');
+export function objectidValidator(Joi: Root) {
+   assert(Joi && Object.prototype.toString.call(Joi.types) == "[object Function]", 'Invalid Joi object');
 
-   return Joi.custom((value: string | ObjectID, helper: CustomHelpers): string | ObjectID | LanguageMessages | ErrorReport => {
+   return function objectId(message: string) {
+      
+      return Joi.custom((value: string | ObjectID, helper: CustomHelpers): string | ObjectID | LanguageMessages | ErrorReport => {
 
-      if (typeof value === 'string' && value.length !== 24)
-         return helper.message(message)
+         if (value.constructor.name !== "ObjectId" && typeof value !== 'string')
+            return helper.message({ custom: message })
 
-      if (value && ObjectID.isValid(value))
-         return value;
+         if (typeof value === 'string' && value.length !== 24)
+            return helper.message({ custom: message })
 
-      return helper.message(message)
-   })
+         if (value && ObjectID.isValid(value))
+            return value;
+
+         return helper.message({ custom: message })
+      })
+   }
 }
