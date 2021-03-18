@@ -25,19 +25,20 @@ const schema = Joi.object({
 
 
 // VALID values
+//
 // new ObjectID()                           
 // new ObjectID("ccd563780134d5678901234a")  
 // '6053a49e634e0ec405295ba8'                
 
+
 // INVALID values
+//
 // '$bcd56778c9a345678901234'
 // ' bcd56789012345678901234'
 // '6053a49e634e0ec405g95ba8'
-// 123456789012345678901234  
+// 748397383836789234567823  
 // { }
 // null
-
-
 ```
 
 
