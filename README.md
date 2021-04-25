@@ -50,4 +50,4 @@ const schema = Joi.object({
 
 ## License
 
-[MIT](https://github.com/saucecodee/joi-objectid-validator/blob/master/LICENSE)
+[MIT](https://github.com/saucecodee/joi-objectid-validator/blob/main/LICENSE)
